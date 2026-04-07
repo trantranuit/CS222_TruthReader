@@ -89,4 +89,4 @@ Please cite the repo if you use the model or code in this repo.
 
 ## :scroll: License
 
-This repository respects to MIT license.
+This repository respects to MIT license.# CS222_TruthReader
