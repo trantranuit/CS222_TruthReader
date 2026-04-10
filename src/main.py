@@ -65,13 +65,13 @@ def summarize_single_doc(
     
     title = chat_tokenizer.decode(chat_tokenizer.encode(title, add_special_tokens=False)[:100])
     document = chat_tokenizer.decode(chat_tokenizer.encode(document, add_special_tokens=False)[:input_max_len])
-    document_string = f'## 文档[1]\t{title}\n{document}'
+    document_string = f'## Document[1]\t{title}\n{document}'
 
-    system = '''请基于给定的文档，生成问题的答案。如果文档中没有包含答案的信息，请回复抱歉并给出理由。'''
+    system = '''Based on the given documents, generate an answer to the question. If the documents do not contain information to answer the question, please reply with an apology and explain the reason.'''
     if is_chinese_document(document[:4096]):
-        question = "请分点概括这篇文章的主要内容"
+        question = "Please summarize the main content of this article point by point."
         
-        summary_prefix = "# 文章摘要\n\n"
+        summary_prefix = "# Article Summary\n\n"
     else:
         question = "Please systematically summarize the main content of this document."
         summary_prefix = "# Document Abstract\n\n"
@@ -540,7 +540,7 @@ def main(
                     dochelper_chat_fn,
                     chatbot=gr.Chatbot(scale=1, label="chatbot", show_label=False, show_copy_button=True, likeable=True, layout="panel", render=False),
                     textbox=gr.Textbox(placeholder="Please upload files first.", container=False, scale=7, render=False, max_lines=4, interactive=False, value=None),
-                    css=Path(__file__).parent / "themes/styles.css",
+                    css=Path(__file__).parent / "resources/styles.css",
                     title="📚TruthReader",
                     theme="soft",
                     fill_height=True,

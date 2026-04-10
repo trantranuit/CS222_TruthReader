@@ -260,7 +260,7 @@ def generate_qa_prompt(
         title = tokenizer.decode(tokenizer.encode(title, add_special_tokens=False)[:100])
         text = tokenizer.decode(tokenizer.encode(text, add_special_tokens=False)[:max_context_len])
 
-        document = f"""## 文档[{i+1}]\t{title}-{item.metadata["page_id"]}\n{text}"""
+        document = f"""## Document[{i+1}]\t{title}-{item.metadata["page_id"]}\n{text}"""
         documents_list.append(document)
     
     documents_string = "\n\n".join(documents_list)
@@ -269,7 +269,7 @@ def generate_qa_prompt(
         if len(tokenizer.encode(documents_string, add_special_tokens=False)) < max_context_len:
             break
     
-    system = '''请基于给定的文档，生成问题的答案。如果文档中没有包含答案的信息，请回复抱歉并给出理由。'''
+    system = '''Based on the given documents, generate an answer to the question. If the documents do not contain information to answer the question, please reply with an apology and explain the reason.'''
     prompt = "{system}\n\n# DOCUMENTS:\n{documents}\n\n# QUESTION: {Question}\n\n# ANSWER: "
 
     qa_prompt = prompt.format_map({
